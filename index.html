@@ -6,11 +6,14 @@
 
     <script>
 
+          let mistakes = 0;
+          let guesses = ""
+          let pattern = ""
+
+          let new_data = {}
+
       // generate table
       let table = document.createElement("TABLE");
-
-      //table.appendChild()
-
 
       // generate all the buttons
       for(let letter=65;letter<91;letter++) {
@@ -21,15 +24,66 @@
 
 
 
-          alert(String.fromCharCode(letter)) // this happens when clicked on the button
+
+
+
+
+
+
+
+
+
+
 
           // testing fetch
-          fetch(`cgi-bin/galgje.cgi?data=${JSON.stringify(response)}&text=${JSON.stringify(btn.textContent)}`)
-        .then(antwoord => antwoord.json())
-        .then(data => response = JSON.stringify(data));
+
+
+
+
+          fetch(`cgi-bin/game.cgi?guesses=${guesses}&pattern=${pattern}&mistakes=${mistakes}&letter=${btn.textContent}`)
+            .then(antwoord => antwoord.json()) // convert respons to json
+            .then(data => {
+                            mistakes = data["mistakes"];
+                            guesses = data["guesses"];
+                            pattern = data["pattern"];
+
+            });
+          let image = document.createElement("IMG");
+          image.src = `afbeeldingen/galgje${mistakes}.png`;
+          image.align = "center";
+          document.body.appendChild(image);
+
+          let pattern_view = document.createElement("p");
+          pattern_view.innerHTML = pattern
+          pattern_view.align = "center";
+          document.body.appendChild(pattern_view);
+          pattern.replaceAll("_", ".");
+
           // end testing fetch
 
+
+
+
           btn.disabled = true; // disable the button
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         };
         table.appendChild(btn)
         let space = document.createElement("span");

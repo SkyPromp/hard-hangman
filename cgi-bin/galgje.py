@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import json
-import os
 import random
 import re
 import string
@@ -10,7 +9,7 @@ class Galgje:
     def __init__(self, guesses, pattern, mistakes):
 
         # import all the words
-        words = open(os.path.split(os.getcwd())[0] + "/woorden.txt").read().splitlines()
+        words = open("../woorden.txt").read().splitlines()
 
         # letters that already have been guessed
         self.guesses = set(guesses)
@@ -19,15 +18,18 @@ class Galgje:
         self.mistakes = mistakes
 
         # set default (empty) pattern
-        self.pattern = pattern
+        if pattern != "":
+            self.pattern = pattern
+        else:
+            self.pattern = "." * len(random.choice(words))
 
         # set initial wordlist to all words of the same length as the pattern
         self.words = []
         for word in words:
             if len(word) == len(self.pattern):
                 self.words.append(word)
-
-        self.words = self.getMatchingWords()
+        if pattern != "."*len(pattern):
+            self.words = self.getMatchingWords()
 
     # get all the words that match the pattern
     def getMatchingWords(self):
