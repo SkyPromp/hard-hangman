@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+import json
 import os
 import random
 import re
@@ -5,22 +7,27 @@ import string
 
 
 class Galgje:
-    def __init__(self):
+    def __init__(self, guesses, pattern, mistakes):
 
         # import all the words
         words = open(os.path.split(os.getcwd())[0] + "/woorden.txt").read().splitlines()
 
         # letters that already have been guessed
-        self.guesses = set()
+        self.guesses = set(guesses)
+
+        # incorrect guesses
+        self.mistakes = mistakes
 
         # set default (empty) pattern
-        self.pattern = "." * len(random.choice(words))
+        self.pattern = pattern
 
         # set initial wordlist to all words of the same length as the pattern
         self.words = []
         for word in words:
             if len(word) == len(self.pattern):
                 self.words.append(word)
+
+        self.words = self.getMatchingWords()
 
     # get all the words that match the pattern
     def getMatchingWords(self):
@@ -50,25 +57,31 @@ class Galgje:
             max_value = max(pattern_count.values())
             max_patterns = [k for k, v in pattern_count.items() if v == max_value]
             if self.pattern not in max_patterns:
-                # gets a random pattern with the highest number of words
                 self.pattern = random.choice(max_patterns)
+
+            else:
+                self.mistakes += 1
 
             self.words = self.getMatchingWords()
             return self.pattern
-        return "no words left"
+        raise AssertionError("No words with this pattern")
 
     def play(self, letter):
         if letter not in string.ascii_letters:
             raise AssertionError("Invalid character(s), must be 1 character in the alphabet")
-        print(self.mostPossibilities(letter.upper()).replace(".", "_"))
-        print(' '.join(sorted(self.guesses)))
+
+        return json.dumps({"pattern": self.mostPossibilities(letter.upper()).replace(".", "_"),
+                           "guesses": ' '.join(sorted(self.guesses)).replace(" ", ""),
+                           "mistakes": self.mistakes})
 
     def getPattern(self):
-        return self.pattern.replace(".", f"[^{' '.join(self.guesses)}]")
+        if self.guesses != set():
+            return self.pattern.replace(".", f"[^{' '.join(self.guesses)}]")
+        return self.pattern
 
 
-g = Galgje()
-print(g.pattern.replace(".", "_"))
-
-while True:
-    g.play(input())
+# g = Galgje()
+# print(g.pattern.replace(".", "_"))
+#
+# while True:
+#     g.play(input())

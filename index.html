@@ -3,5 +3,54 @@
     <title>Galgje</title>
   </head>
   <body>
+
+    <script>
+
+      // generate table
+      let table = document.createElement("TABLE");
+
+      //table.appendChild()
+
+
+      // generate all the buttons
+      for(let letter=65;letter<91;letter++) {
+        let btn = document.createElement("button");
+
+        btn.innerHTML = String.fromCharCode(letter);
+        btn.onclick = function () {
+
+
+
+          alert(String.fromCharCode(letter)) // this happens when clicked on the button
+
+          // testing fetch
+          fetch(`cgi-bin/galgje.cgi?data=${JSON.stringify(response)}&text=${JSON.stringify(btn.textContent)}`)
+        .then(antwoord => antwoord.json())
+        .then(data => response = JSON.stringify(data));
+          // end testing fetch
+
+          btn.disabled = true; // disable the button
+        };
+        table.appendChild(btn)
+        let space = document.createElement("span");
+        space.innerHTML = " ";
+        table.appendChild(space);
+
+
+        //document.body.appendChild(btn); // send button to the body
+        if (letter === 75 || letter === 86){
+          table.align = "center";
+          document.body.appendChild(table);
+          table = document.createElement("TABLE");
+          document.body.appendChild(document.createElement("br"));
+        }
+
+    }
+      table.align = "center";
+    document.body.appendChild(table);
+    </script>
+
   </body>
 </html>
+
+
