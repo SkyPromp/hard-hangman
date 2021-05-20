@@ -80,10 +80,3 @@ class Galgje:
         if self.guesses != set():
             return self.pattern.replace(".", f"[^{' '.join(self.guesses)}]")
         return self.pattern
-
-
-# g = Galgje()
-# print(g.pattern.replace(".", "_"))
-#
-# while True:
-#     g.play(input())

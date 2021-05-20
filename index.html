@@ -6,7 +6,7 @@
 
     <script>
 
-          let mistakes = 0;
+          let mistakes = "0";
           let guesses = ""
           let pattern = ""
 
@@ -22,26 +22,8 @@
         btn.innerHTML = String.fromCharCode(letter);
         btn.onclick = function () {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-          // testing fetch
-
-
-
-
           fetch(`cgi-bin/game.cgi?guesses=${guesses}&pattern=${pattern}&mistakes=${mistakes}&letter=${btn.textContent}`)
-            .then(antwoord => antwoord.json()) // convert respons to json
+            .then(antwoord => antwoord.json()) // convert response to json
             .then(data => {
                             mistakes = data["mistakes"];
                             guesses = data["guesses"];
@@ -54,35 +36,12 @@
           document.body.appendChild(image);
 
           let pattern_view = document.createElement("p");
-          pattern_view.innerHTML = pattern
+          pattern_view.innerHTML = pattern;
           pattern_view.align = "center";
           document.body.appendChild(pattern_view);
           pattern.replaceAll("_", ".");
 
-          // end testing fetch
-
-
-
-
           btn.disabled = true; // disable the button
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         };
         table.appendChild(btn)

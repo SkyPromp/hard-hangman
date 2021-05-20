@@ -4,18 +4,19 @@ import cgi
 from spel import play
 
 # Lees data verstuurd door JavaScript
-parameters = cgi.FieldStorage(keep_blank_values=1);
+parameters = cgi.FieldStorage(keep_blank_values=1)
 
-guesses = parameters.getvalue('guesses');
-pattern = parameters.getvalue('pattern');
-mistakes = parameters.getvalue('mistakes');
-letter = parameters.getvalue('letter');
+guesses = parameters.getvalue('guesses')
+pattern = parameters.getvalue('pattern')
+mistakes = parameters.getvalue('mistakes')
+letter = parameters.getvalue('letter')
 
 
 # Bereken te verzenden data
-nieuwe_data = play(guesses, pattern, mistakes, letter);
+new_data = play(guesses, pattern, mistakes, letter)
 
 # Stuur antwoord terug
 print("Content-Type: application/json")
 print()
-print(json.dumps(nieuwe_data))
+print(json.dumps(new_data))
+
