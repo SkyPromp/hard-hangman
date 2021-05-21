@@ -36,6 +36,10 @@ fetch(`cgi-bin/game.cgi?guesses=&pattern=&mistakes=0&letter=Q`)
 // generate table
 let table = document.createElement("TABLE");
 
+function rety(){
+
+}
+
 // generate all the buttons
 for (let letter = 65; letter < 91; letter++) {
     let btn = document.createElement("button");
@@ -49,7 +53,11 @@ for (let letter = 65; letter < 91; letter++) {
                 mistakes = data["mistakes"];
                 guesses = data["guesses"];
                 pattern = data["pattern"];
-                display(mistakes, pattern);
+                if(mistakes <= 9){
+                    display(mistakes, pattern);
+                } else{
+                    document.getElementById("body").innerHTML = "<br><h1 align='center'>Too bad, you lost!</h1><h2 align='center' onclick='window.location.reload();'>Click here to retry!</h2>>";
+                }
 
             });
 

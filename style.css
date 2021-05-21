@@ -25,3 +25,9 @@ button:hover{
 h1{
    font-size: 4em;
 }
+h2{
+    text-decoration: underline;
+}
+h2:hover{
+    text-decoration: none;
+}
