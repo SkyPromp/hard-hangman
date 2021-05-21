@@ -14,6 +14,7 @@ function display(mistakes, pattern) {
         image.width = "268";
         image.height = "415";
         image.align = "center";
+        image.className = "imageplacement"
         document.body.appendChild(image);
     }
     document.getElementById("image").src = `afbeeldingen/galgje${mistakes}.png`;

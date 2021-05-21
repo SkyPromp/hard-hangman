@@ -1,0 +1,9 @@
+body{
+    background: #efefef;
+    font-family: Segoe UI;
+}
+.imageplacement{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
