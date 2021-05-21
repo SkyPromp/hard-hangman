@@ -41,6 +41,7 @@ class Galgje:
 
         return wordlist
 
+    # returns the pattern that matches the most words
     def mostPossibilities(self, letter):
         self.guesses.add(letter)
         pattern_count = {}
@@ -68,6 +69,7 @@ class Galgje:
             return self.pattern
         raise AssertionError("No words with this pattern")
 
+    # run the game and retrieve the valuable data
     def play(self, letter):
         if letter not in string.ascii_letters:
             raise AssertionError("Invalid character(s), must be 1 character in the alphabet")
@@ -76,6 +78,7 @@ class Galgje:
                            "guesses": ' '.join(sorted(self.guesses)).replace(" ", ""),
                            "mistakes": self.mistakes})
 
+    # fill in the blanks of the pattern
     def getPattern(self):
         if self.guesses != set():
             return self.pattern.replace(".", f"[^{' '.join(self.guesses)}]")
