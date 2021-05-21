@@ -53,6 +53,9 @@ for (let letter = 65; letter < 91; letter++) {
                 mistakes = data["mistakes"];
                 guesses = data["guesses"];
                 pattern = data["pattern"];
+                if (!(pattern.includes("."))){
+                    document.getElementById("body").innerHTML = "<br><h1 align='center'>Congratulations, you won!</h1><h2 align='center' onclick='window.location.reload();'>Click here to retry!</h2>>";
+                }
                 if(mistakes <= 9){
                     display(mistakes, pattern);
                 } else{
