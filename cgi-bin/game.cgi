@@ -8,7 +8,7 @@ parameters = cgi.FieldStorage(keep_blank_values=1)
 
 guesses = parameters.getvalue('guesses')
 pattern = parameters.getvalue('pattern')
-mistakes = parameters.getvalue('mistakes')
+mistakes = int(parameters.getvalue('mistakes'))
 letter = parameters.getvalue('letter')
 
 

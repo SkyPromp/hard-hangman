@@ -9,7 +9,7 @@ class Galgje:
     def __init__(self, guesses, pattern, mistakes):
 
         # import all the words
-        words = open("../woorden.txt").read().splitlines()
+        words = open("woorden.txt").read().splitlines()
 
         # letters that already have been guessed
         self.guesses = set(guesses)
@@ -72,7 +72,7 @@ class Galgje:
         if letter not in string.ascii_letters:
             raise AssertionError("Invalid character(s), must be 1 character in the alphabet")
 
-        return json.dumps({"pattern": self.mostPossibilities(letter.upper()).replace(".", "_"),
+        return json.dumps({"pattern": self.mostPossibilities(letter.upper()),
                            "guesses": ' '.join(sorted(self.guesses)).replace(" ", ""),
                            "mistakes": self.mistakes})
 
