@@ -19,9 +19,17 @@ function display(mistakes, pattern) {
     document.getElementById("image").src = `afbeeldingen/galgje${mistakes}.png`;
 }
 
+
 let mistakes = 0;
-let guesses = ""
-let pattern = ""
+let guesses = "";
+let pattern = "";
+
+fetch(`cgi-bin/game.cgi?guesses=&pattern=&mistakes=0&letter=Q`)
+            .then(antwoord => antwoord.json()) // convert response to json
+            .then(data => {
+                pattern = data["pattern"].replaceAll("Q", ".");
+                display(0, data["pattern"].replaceAll("Q", "."));
+            });
 
 
 // generate table
