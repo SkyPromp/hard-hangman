@@ -28,7 +28,7 @@ class Galgje:
         for word in words:
             if len(word) == len(self.pattern):
                 self.words.append(word)
-        if pattern != "."*len(pattern):
+        if pattern != "."*len(pattern) or guesses != "":
             self.words = self.getMatchingWords()
 
     # get all the words that match the pattern
