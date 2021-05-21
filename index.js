@@ -5,7 +5,7 @@ function display(mistakes, pattern) {
         pattern_view.align = "center";
         document.body.appendChild(pattern_view);
     }
-    document.getElementById("pattern").innerHTML = pattern.replaceAll(".", "_ ");
+    document.getElementById("pattern").innerHTML = pattern.replaceAll(".", "_").split('').join(' ');
 
 
     if (!(document.getElementById("image"))) {
