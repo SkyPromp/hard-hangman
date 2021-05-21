@@ -19,4 +19,3 @@ new_data = play(guesses, pattern, mistakes, letter)
 print("Content-Type: application/json")
 print()
 print(json.dumps(new_data))
-
